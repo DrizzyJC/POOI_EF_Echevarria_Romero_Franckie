@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Consulta por DNI";
+}
+
+<h2>Consulta de País por DNI del Supervisor</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        <label>DNI del Supervisor:</label><br />
+        @Html.TextBox("dni", null, new { maxlength = 8 })
+    </div>
+    <br />
+    <input type="submit" value="Consultar" />
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <p><strong>@ViewBag.Mensaje</strong></p>
+}

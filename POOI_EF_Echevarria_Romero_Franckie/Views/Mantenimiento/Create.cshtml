@@ -1,0 +1,70 @@
+﻿@model POOI_EF_Echevarria_Romero_Franckie.Models.Supervisor
+
+@{
+    ViewBag.Title = "Registrar Supervisor";
+}
+
+<h2>Registrar Supervisor</h2>
+
+@if (ViewBag.Mensaje != null)
+{
+    <p style="color:blue"><strong>@ViewBag.Mensaje</strong></p>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <table>
+        <tr>
+            <td>Nombre:</td>
+            <td>
+                @Html.TextBoxFor(m => m.nomsup)
+                @Html.ValidationMessageFor(m => m.nomsup)
+            </td>
+        </tr>
+
+        <tr>
+            <td>Dirección:</td>
+            <td>
+                @Html.TextBoxFor(m => m.dirsup)
+                @Html.ValidationMessageFor(m => m.dirsup)
+            </td>
+        </tr>
+
+        <tr>
+            <td>Email:</td>
+            <td>
+                @Html.TextBoxFor(m => m.emailsup, new { type = "text" })
+                @Html.ValidationMessageFor(m => m.emailsup)
+            </td>
+        </tr>
+
+        <tr>
+            <td>País:</td>
+            <td>
+                @Html.DropDownListFor(
+                    m => m.idpais,
+                    new SelectList(ViewBag.Paises, "idpais", "nompais"),
+                    "-- Seleccione País --"
+                )
+                @Html.ValidationMessageFor(m => m.idpais)
+            </td>
+        </tr>
+
+        <tr>
+            <td>DNI:</td>
+            <td>
+                @Html.TextBoxFor(m => m.dnisup, new { maxlength = 8 })
+                @Html.ValidationMessageFor(m => m.dnisup)
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Registrar" />
+                @Html.ActionLink("Volver al listado", "Index")
+            </td>
+        </tr>
+    </table>
+}

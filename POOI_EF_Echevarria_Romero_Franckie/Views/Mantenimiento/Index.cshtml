@@ -1,0 +1,47 @@
+﻿
+@model IEnumerable <POOI_EF_Echevarria_Romero_Franckie.Models.Supervisor>
+
+@{
+    ViewBag.Title = "Listado de Supervisores";
+}
+
+<h2>Listado de Supervisores</h2>
+
+@if (ViewBag.Mensaje != null)
+{
+    <p style="color:green"><strong>@ViewBag.Mensaje</strong></p>
+}
+
+<p>
+    @Html.ActionLink("Nuevo Supervisor", "Create")
+</p>
+
+<table border="1" cellpadding="5" cellspacing="0">
+    <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Email</th>
+        <th>DNI</th>
+        <th>Acción</th>
+    </tr>
+
+    @foreach (var item in Model )
+    {
+        <tr>
+            <td>@item.idsup</td>
+            <td>@item.nomsup</td>
+            <td>@item.dirsup</td>
+            <td>@item.emailsup</td>
+            <td>@item.dnisup</td>
+            <td>
+                @Html.ActionLink(
+                    "Eliminar",
+                    "Delete",
+                    new { id = item.idsup },
+                    new { onclick = "return confirm('¿Desea eliminar este registro?');" }
+                )
+            </td>
+        </tr>
+    }
+</table>

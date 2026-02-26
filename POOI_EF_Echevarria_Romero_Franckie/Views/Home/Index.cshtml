@@ -1,0 +1,94 @@
+﻿@model IEnumerable<POOI_EF_Echevarria_Romero_Franckie.Models.Supervisor>
+
+
+@{
+    ViewBag.Title = "Supervisores";
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-5">
+
+    <!-- TÍTULO -->
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="fw-bold text-primary">
+                📋 Mantenimiento de Supervisores
+            </h2>
+            <p class="text-muted">
+                Lista general de supervisores registrados en el sistema
+            </p>
+        </div>
+        <div class="col text-end">
+            @Html.ActionLink(
+                "➕ Nuevo Supervisor",
+                "Create",
+                null,
+                new { @class = "btn btn-success" }
+            )
+        </div>
+    </div>
+
+    <!-- MENSAJE -->
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            @ViewBag.Mensaje
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- TABLA -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Email</th>
+                        <th>DNI</th>
+                        <th class="text-center">Acción</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.idsup</td>
+                            <td>@item.nomsup</td>
+                            <td>@item.dirsup</td>
+                            <td>@item.emailsup</td>
+                            <td>@item.dnisup</td>
+                            <td class="text-center">
+                                @Html.ActionLink(
+                                    "🗑 Eliminar",
+                                    "Delete",
+                                    new { id = item.idsup },
+                                    new
+                                    {
+                                        @class = "btn btn-outline-danger btn-sm",
+                                        onclick = "return confirm('¿Está seguro de eliminar este supervisor?');"
+                                    }
+                                )
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-warning text-center">
+                    No existen supervisores registrados.
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
